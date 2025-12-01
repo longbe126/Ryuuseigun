@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 # .env secrets
 .env
+release/Ryuuseigun (流星群) Setup 1.0.0.exe
+release/win-unpacked/resources/app.asar
+release/win-unpacked/Ryuuseigun (流星群).exe
