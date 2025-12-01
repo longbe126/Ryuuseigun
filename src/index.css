@@ -1,0 +1,24 @@
+  /* src/index.css */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+  :root {
+    --bg-color: #1e1e2e;
+    --sidebar-bg: rgba(30, 30, 46, 0.95);
+    --text-color: #cdd6f4;
+    --accent-color: #f5c2e7; /* Hồng Anime */
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none; /* Chặn bôi đen văn bản cho giống App xịn */
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden; /* Ẩn thanh cuộn thừa của Windows */
+  }
