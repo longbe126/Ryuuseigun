@@ -1,24 +1,44 @@
-  /* src/index.css */
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+/* src/index.css - GHIBLI STYLE */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap');
 
-  :root {
-    --bg-color: #1e1e2e;
-    --sidebar-bg: rgba(30, 30, 46, 0.95);
-    --text-color: #cdd6f4;
-    --accent-color: #f5c2e7; /* Hồng Anime */
-    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
-  }
+:root {
+  /* Hình nền Ghibli (Đồi cỏ xanh & Mây trắng) */
+  --bg-image: url('https://images4.alphacoders.com/936/936378.jpg');
+  
+  /* Bảng màu Pastel (Dịu mắt) */
+  --glass-bg: rgba(255, 255, 255, 0.85); /* Kính trắng sữa */
+  --primary: #88d8b0; /* Xanh lá mạ */
+  --secondary: #ffcc5c; /* Vàng nắng */
+  --accent-color: #ff6f69; /* Hồng san hô */
+  --text-color: #5d5d5d; /* Xám đậm (thay vì đen tuyền cho đỡ gắt) */
+  --text-light: #888888;
+  
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08); /* Bóng đổ nhẹ */
+}
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    user-select: none; /* Chặn bôi đen văn bản cho giống App xịn */
-  }
+* {
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+  user-select: none;
+}
 
-  body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    overflow: hidden; /* Ẩn thanh cuộn thừa của Windows */
-  }
+body {
+  font-family: 'Nunito', sans-serif; /* Font tròn trịa dễ thương */
+  color: var(--text-color);
+  overflow: hidden;
+  
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+/* Thanh cuộn kiểu Ghibli */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { 
+    background: rgba(0,0,0,0.1); 
+    border-radius: 10px; 
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }

@@ -1,18 +1,15 @@
-// src/components/LoginScreen.jsx
+// src/components/LoginScreen.jsx (CODE ĐÃ SỬA LỖI HIỂN THỊ ĐEN THUI)
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FaDiscord, FaTimes, FaSpinner, FaUserCheck, FaUserTimes } from 'react-icons/fa';
 
-// Khai báo giao tiếp IPC với Electron/Node.js
 const { ipcRenderer } = window.require('electron'); 
 
 function LoginScreen({ onLoginSuccess, guildId }) {
-    const [status, setStatus] = useState('initial'); // initial | pending | checking | success | error
+    const [status, setStatus] = useState('initial'); 
     const [message, setMessage] = useState('');
 
-    // Logic này chạy khi màn hình Login được hiển thị
     useEffect(() => {
-        // 1. Kiểm tra xem URL có chứa mã ủy quyền (code) từ Discord không
         const urlParams = new URLSearchParams(window.location.search);
         const authCode = urlParams.get('code');
         const error = urlParams.get('error');
@@ -24,22 +21,25 @@ function LoginScreen({ onLoginSuccess, guildId }) {
         }
 
         if (authCode) {
-            // 2. Nếu có mã, chuyển sang trạng thái kiểm tra
             setStatus('checking');
             setMessage('Đang kiểm tra tư cách thành viên...');
             
             // Xóa code khỏi URL để không bị chạy lại (BẮT BUỘC)
             window.history.replaceState(null, '', window.location.pathname); 
 
-            // 3. Gửi mã code đến Backend để đổi Token và kiểm tra Server
+            // Gửi mã code đến Backend để đổi Token và kiểm tra Server
             ipcRenderer.invoke('check-membership', authCode)
                 .then(result => {
                     if (result.success) {
                         if (result.hasMembership) {
                             setStatus('success');
                             setMessage('✅ Chào mừng Sếp, tư cách thành viên hợp lệ!');
-                            // Sau 2s thì chuyển sang Dashboard
-                            setTimeout(() => onLoginSuccess(result.token), 2000); 
+                            
+                            // LỖI ĐEN THUI ĐƯỢC FIX TẠI ĐÂY:
+                            // Thay vì dùng setTimeout và onLoginSuccess, ta dùng window.location.href
+                            onLoginSuccess(result.token); 
+                            window.location.href = window.location.origin; // <-- BUỘC APP RENDER LẠI TỪ GỐC
+                            
                         } else {
                             setStatus('no_membership');
                             setMessage('⛔ Lỗi: Người dùng chưa phải là thành viên Server!');
@@ -56,11 +56,9 @@ function LoginScreen({ onLoginSuccess, guildId }) {
         }
     }, [onLoginSuccess]); // Chỉ chạy khi component mount
 
-    // Bắt đầu quá trình Login (Mở trình duyệt)
     const handleLogin = () => {
         setStatus('pending');
         setMessage('Đang mở trang đăng nhập Discord...');
-        // Gửi lệnh qua IPC để Main Process mở trình duyệt
         ipcRenderer.send('discord-login');
     };
 
@@ -111,12 +109,13 @@ function LoginScreen({ onLoginSuccess, guildId }) {
     );
 }
 
-// --- CSS STYLED COMPONENTS ---
+// --- CSS STYLED COMPONENTS (Giữ nguyên) ---
+// ... (Các CSS Styles giữ nguyên) ...
+
 const spin = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 `;
-
 const Container = styled.div`
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -126,7 +125,6 @@ const Container = styled.div`
     align-items: center;
     z-index: 999;
 `;
-
 const LoginCard = styled.div`
     background: var(--sidebar-bg);
     padding: 40px;
@@ -139,9 +137,8 @@ const LoginCard = styled.div`
     h2 { margin-bottom: 10px; color: var(--accent-color); }
     p { margin-bottom: 30px; opacity: 0.8; }
 `;
-
 const LoginButton = styled.button`
-    background: #7289da; /* Màu Discord */
+    background: #7289da;
     border: none;
     padding: 15px 30px;
     border-radius: 10px;
@@ -157,7 +154,6 @@ const LoginButton = styled.button`
 
     &:hover { background: #5d70b0; }
 `;
-
 const LoadingMessage = styled.div`
     font-size: 1rem;
     margin-top: 20px;
@@ -168,20 +164,17 @@ const LoadingMessage = styled.div`
         margin-right: 10px;
     }
 `;
-
 const SuccessMessage = styled.div`
     color: #00ff88;
     font-size: 1.1rem;
     font-weight: bold;
     margin-top: 20px;
 `;
-
 const ErrorMessage = styled.div`
     color: #ff4757;
     font-size: 1rem;
     margin-top: 20px;
 `;
-
 const ErrorCard = styled.div`
     background: rgba(255, 71, 87, 0.1);
     padding: 15px;
@@ -189,7 +182,6 @@ const ErrorCard = styled.div`
     margin-top: 20px;
     border: 1px solid #ff4757;
 `;
-
 const InviteButton = styled(LoginButton)`
     background: #ff4757;
     margin-top: 15px;
