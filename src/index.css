@@ -1,19 +1,22 @@
-/* src/index.css - GHIBLI STYLE */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap');
+/* src/index.css - GHIBLI MODERN UI */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 
 :root {
-  /* Hình nền Ghibli (Đồi cỏ xanh & Mây trắng) */
+  /* Hình nền: Bầu trời Ghibli trong trẻo */
   --bg-image: url('https://images4.alphacoders.com/936/936378.jpg');
   
-  /* Bảng màu Pastel (Dịu mắt) */
-  --glass-bg: rgba(255, 255, 255, 0.85); /* Kính trắng sữa */
-  --primary: #88d8b0; /* Xanh lá mạ */
-  --secondary: #ffcc5c; /* Vàng nắng */
-  --accent-color: #ff6f69; /* Hồng san hô */
-  --text-color: #5d5d5d; /* Xám đậm (thay vì đen tuyền cho đỡ gắt) */
-  --text-light: #888888;
+  /* Bảng màu Ghibli */
+  --glass-bg: rgba(255, 255, 255, 0.75); /* Kính trắng mờ */
+  --sidebar-bg: rgba(255, 255, 255, 0.9);
   
-  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08); /* Bóng đổ nhẹ */
+  --primary: #5d7c68; /* Xanh lá rêu */
+  --secondary: #89c2d9; /* Xanh trời nhạt */
+  --accent: #ff9f1c; /* Cam nắng chiều */
+  
+  --text-main: #2d3436;
+  --text-light: #636e72;
+  
+  --shadow-soft: 0 8px 24px rgba(149, 157, 165, 0.2);
 }
 
 * {
@@ -23,8 +26,8 @@
 }
 
 body {
-  font-family: 'Nunito', sans-serif; /* Font tròn trịa dễ thương */
-  color: var(--text-color);
+  font-family: 'Nunito', sans-serif; /* Font tròn trịa, dễ thương */
+  color: var(--text-main);
   overflow: hidden;
   
   background-image: var(--bg-image);
@@ -34,8 +37,8 @@ body {
   height: 100vh;
 }
 
-/* Thanh cuộn kiểu Ghibli */
-::-webkit-scrollbar { width: 8px; }
+/* Thanh cuộn đẹp */
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { 
     background: rgba(0,0,0,0.1); 
